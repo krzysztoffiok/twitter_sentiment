@@ -17,10 +17,10 @@ Example use:
 python3 model_train.py --k_folds=5 --test_run=fasttext
 
 # to train RoBERTa large scalar mix of 4 last layers model with 2-layer biLSTM
-python3 model_train.py --k_folds=5--test_run=roberta_lstm
+python3 model_train.py --k_folds=5 --test_run=roberta_lstm
 
 # to fine-tune RoBERTa large model and use CLS token output
-python3 model_train.py --k_folds=5--test_run=roberta_ft --fine_tune=True
+python3 model_train.py --k_folds=5 --test_run=roberta_ft --fine_tune=True
 """
 
 parser = argparse.ArgumentParser(description='Classify data')
