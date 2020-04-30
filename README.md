@@ -6,7 +6,7 @@ This repository contains data, code and results for fine-grained sentiment analy
 Authors: Krzysztof Fiok1, Maciej Wilamowski2, Edgar Gutierrez-Franco1 and Waldemar Karwowski1
 
 
-1 University of Central Florida, Department of Industrial Engineering & Management Systems, Orlando, Florida, USA 
+1 University of Central Florida, Department of Industrial Engineering & Management Systems, Orlando, Florida, USA </br>
 2 University of Warsaw, Faculty of Economic Sciences, Warsaw, Poland
 <br/>
 
