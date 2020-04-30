@@ -1,6 +1,8 @@
 import pandas as pd
 import argparse
 import numpy as np
+import flair
+import torch
 
 """ example use to create tweet-level embeddings
 
@@ -23,6 +25,7 @@ for i in {0..4}; do python3 embed_sentences_flair.py --fold=$i --test_run=robert
 python3 embed_sentences_flair.py --use=True
 
 """
+flair.device = torch.device('cpu')
 
 parser = argparse.ArgumentParser(description='Classify data')
 parser.add_argument('--test_run', required=False, default='',
