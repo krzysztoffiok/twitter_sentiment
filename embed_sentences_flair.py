@@ -58,7 +58,7 @@ if not _use:
     import torch
     import flair
     from flair.models import TextClassifier
-    flair.device = torch.device('cuda')
+
 
     # load various embeddings
     from flair.embeddings import WordEmbeddings, DocumentPoolEmbeddings, RoBERTaEmbeddings
