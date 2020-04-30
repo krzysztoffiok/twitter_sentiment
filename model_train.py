@@ -1,7 +1,6 @@
 import pandas as pd
 import os
 import argparse
-import time
 import sys
 import flair
 import torch
@@ -66,9 +65,6 @@ for i in range(k_folds):
     except FileExistsError:
         continue
 
-# for training time computation
-time_schedule = []
-
 # k folds training
 for i in range(k_folds):
     # imports should be done repeatedly because of not investigated Flair issue
@@ -119,9 +115,6 @@ for i in range(k_folds):
                                 label_dictionary=corpus.make_label_dictionary(),
                                 multi_label=False)
 
-    # start counting training time before trainer
-    time_schedule.append(time.perf_counter())
-
     # define the training regime for model+RNN
     if not fine_tune:
         # train model
@@ -157,20 +150,3 @@ for i in range(k_folds):
     # rename the model files to fit test_run case
     os.rename(src="{}best-model.pt".format(path2[i]), dst="{}{}_best-model.pt".format(path2[i], test_run))
     os.remove("{}final-model.pt".format(path2[i]))
-
-    # add timestamp after trainer
-    time_schedule.append(time.perf_counter())
-
-# compute k_fold training times
-fold_times = []
-for i in range(len(time_schedule)):
-    if i % 2 == 0:
-        try:
-            fold_times.append(time_schedule[i+1]-time_schedule[i])
-        except IndexError:
-            print("end of range")
-            fold_times.append(time_schedule[i])
-
-# create xlsx with training time parameters
-aggregated_parameters = pd.DataFrame(data=fold_times, index=range(k_folds), columns=["Training time"])
-aggregated_parameters.to_excel("{}/{}_timetrainingstats.xlsx".format(results_path, test_run))
