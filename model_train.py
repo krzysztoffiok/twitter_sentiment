@@ -6,7 +6,7 @@ import flair
 import torch
 
 # select device
-flair.device = torch.device('cuda')
+# flair.device = torch.device('cuda')
 # flair.device = torch.device('cpu')
 # torch.cuda.empty_cache()
 
