@@ -123,7 +123,8 @@ for i in range(k_folds):
                       mini_batch_size=32,
                       anneal_factor=0.5,
                       patience=10,
-                      embeddings_storage_mode='gpu',
+                      # if enough memory is available this can be uncommented
+                      # embeddings_storage_mode='gpu',
                       shuffle=True,
                       min_learning_rate=0.01,
                       )
