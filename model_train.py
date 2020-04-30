@@ -86,13 +86,11 @@ for i in range(k_folds):
     if test_run == "fasttext":
         word_embeddings = [WordEmbeddings('en-twitter')]
     elif test_run == "roberta_lstm":
-        flair.device = torch.device('cpu')
         word_embeddings = [RoBERTaEmbeddings(pretrained_model_name_or_path="roberta-large", layers="21,22,23,24",
                                              pooling_operation="first", use_scalar_mix=True)]
 
     # Case 1: Use selected word_embeddings model fed to an RNN
     if not fine_tune:
-        flair.device = torch.device('cuda')
         # define the RNN model
         document_embeddings = DocumentRNNEmbeddings(word_embeddings,
                                                     hidden_size=512,
