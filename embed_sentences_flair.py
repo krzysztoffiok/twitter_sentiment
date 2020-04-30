@@ -17,7 +17,7 @@ python3 embed_sentences_flair.py --pool=True  --test_run=fasttext
 python3 embed_sentences_flair.py --pool=True  --test_run=roberta
 
 # CLS token output of fine-tuned transformer model
-python3 embed_sentences_flair.py --fold=0 --test_run=roberta_large_ft
+python3 embed_sentences_flair.py --fold=0 --test_run=roberta_ft
 Important: needs to be run separately for each fold e.g. with bash command:
 for i in {0..4}; do python3 embed_sentences_flair.py --fold=$i --test_run=roberta_large_ft; done
 
