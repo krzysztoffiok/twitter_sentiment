@@ -86,8 +86,9 @@ for i in range(k_folds):
     if test_run == "fasttext":
         word_embeddings = [WordEmbeddings('en-twitter')]
     elif test_run == "roberta_lstm":
-        word_embeddings = [RoBERTaEmbeddings(pretrained_model_name_or_path="roberta-large", layers="21,22,23,24",
-                                             pooling_operation="first", use_scalar_mix=True)]
+        # from unknown reasons on google colaboratory scalar mix option causes issues with torch.device selection
+        # if you run locally, please add: ,pooling_operation="first", use_scalar_mix=True)
+        word_embeddings = [RoBERTaEmbeddings(pretrained_model_name_or_path="roberta-large", layers="21,22,23,24")]
 
     # Case 1: Use selected word_embeddings model fed to an RNN
     if not fine_tune:
