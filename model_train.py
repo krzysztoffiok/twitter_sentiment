@@ -20,7 +20,7 @@ python3 model_train.py --k_folds=5 --test_run=fasttext
 python3 model_train.py --k_folds=5 --test_run=roberta_lstm
 
 # to fine-tune RoBERTa large model and use CLS token output
-python3 model_train.py --k_folds=5 --test_run=roberta_ft --fine_tune=True
+python3 model_train.py --k_folds=5 --test_run=roberta_ft --fine_tune
 """
 
 parser = argparse.ArgumentParser(description='Classify data')
@@ -88,10 +88,6 @@ for i in range(k_folds):
     elif test_run == "roberta_lstm":
         word_embeddings = [RoBERTaEmbeddings(pretrained_model_name_or_path="roberta-large", layers="21,22,23,24",
                                              pooling_operation="first", use_scalar_mix=True)]
-    else:
-        print("You need to define proper model name in the code"
-              " or choose from two predefined options: --test_run=fasttext or --test_run=roberta_lstm")
-        break
 
     # Case 1: Use selected word_embeddings model fed to an RNN
     if not fine_tune:
