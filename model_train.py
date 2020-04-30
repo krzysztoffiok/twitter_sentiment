@@ -138,10 +138,11 @@ for i in range(k_folds):
             "{}".format(path2[i]),
             learning_rate=3e-5,  # low learning rate as per BERT paper
             mini_batch_size=32,  # set this high if yo have lots of data, otherwise low
-            # mini_batch_chunk_size=24, # set this low if you experience memory errors
+            mini_batch_chunk_size=12, # set this low if you experience memory errors
             max_epochs=4,  # very few epochs of fine-tuning
             min_learning_rate=3e-6,  # lower the min learning rate
-            embeddings_storage_mode='gpu',
+            # if enough memory is available this can be uncommented
+            # embeddings_storage_mode='gpu',
             shuffle=True,
         )
 
