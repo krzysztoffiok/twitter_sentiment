@@ -19,10 +19,10 @@ The code is written in Python3 and requires GPU computing machine for achieving 
 
 ## Try how it works in google colaboratory:
 
-[Train your own Deep Learning Language Models and embed our tweets in Google colaboratory](https://colab.research.google.com/drive/1K-XQJnauYvULdwUO3vELy9dJ1DHR_53b)
+[Train your own Deep Learning Language Models and embed our tweets in Google colaboratory](https://colab.research.google.com/drive/1K-XQJnauYvULdwUO3vELy9dJ1DHR_53b) </br>
 Select the runtime type Python3 with GPU acceleration for reasonable performance.
 
-[Carry out Machine Learning classification of sentiment in Google colaboratory](https://colab.research.google.com/drive/151uxuOLgsxHDravuN_9k_whn8imC-0dg)
+[Carry out Machine Learning classification of sentiment in Google colaboratory](https://colab.research.google.com/drive/151uxuOLgsxHDravuN_9k_whn8imC-0dg) </br>
 For this part CPU runtime is sufficient.
 
 If you wish to try our code locally:
