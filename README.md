@@ -19,7 +19,7 @@ The code is written in Python3 and requires GPU computing machine for achieving 
 
 ## Try how it works in google colaboratory:
 
-[Train your own Deep Learning Language Models and embed our tweets in Google colaboratory](https://colab.research.google.com/drive/1K-XQJnauYvULdwUO3vELy9dJ1DHR_53b) </br>
+[Train your own Deep Learning Language Models or reproduce our results with Google colaboratory](https://colab.research.google.com/drive/1K-XQJnauYvULdwUO3vELy9dJ1DHR_53b) </br>
 Select the runtime type Python3 with GPU acceleration for reasonable performance if you wish to train you own Deep Learning Language Models or simple CPU runtime if you want to use embeddings computed in our work.
 
 If you wish to try our code locally:
