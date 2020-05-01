@@ -1,5 +1,5 @@
 # Analysis of Twitter sentiment with various Language Models on narrow-scope data
-This repository contains data, code and results for fine-grained sentiment analysis of tweets sent to @USNavy account. The paper describing this research is in preparation.
+This repository contains data, code and results for fine-grained sentiment analysis. The paper describing this research is in preparation.
 
 *"Analysis of sentiment in tweets: comparison of model performance and explainability of predictions"*
 
