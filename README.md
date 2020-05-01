@@ -3,7 +3,7 @@ This repository contains data, code and results for fine-grained sentiment analy
 
 *"Analysis of sentiment in tweets sent to @USNavy account: comparison of model performance and explainability of predictions"*
 
-Authors: Krzysztof Fiok1, Maciej Wilamowski2, Edgar Gutierrez-Franco1 and Waldemar Karwowski1
+Authors: Krzysztof Fiok1, Waldemar Karwowski1, Edgar Gutierrez-Franco1, and Maciej Wilamowski2
 
 
 1 University of Central Florida, Department of Industrial Engineering & Management Systems, Orlando, Florida, USA </br>
