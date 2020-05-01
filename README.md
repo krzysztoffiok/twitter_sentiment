@@ -11,7 +11,7 @@ Authors: Krzysztof Fiok1, Waldemar Karwowski1, Edgar Gutierrez-Franco1, and Maci
 <br/>
 
 
-The whole repository is published under MIT License (please refer to the [License file](https://github.com/krzysztoffiok/twitter_sentiment_to_usnavy/blob/master/LICENSE)).
+The whole repository is published under MIT License (please refer to the [License file](https://github.com/krzysztoffiok/twitter_sentiment/blob/master/LICENSE)).
 
 In due course full description of usage will appear here.
 
@@ -29,7 +29,7 @@ If you wish to try our code locally:
 Please clone this repository and extract zipped files downloaded from "release" section.
 
 ## How the code works:
-You start with a labeled data set of 5000 tweets sent to @USNavy account by various users (file is completely anonymized). There are 5 sentiment classes (0-very negative, 1-negative, 2-neutral, 3-positive, 4-very positive).
+You start with a labeled data set of 5000 tweets (file is completely anonymized). There are 5 sentiment classes (0-very negative, 1-negative, 2-neutral, 3-positive, 4-very positive).
 
 PART I. Training Language Models and embedding tweet texts.
 1) In order to carry out classification, you need to train Language Models on the provided data. Preparing 5-fold cross validated data splits is carried out in Google Colaboratory or if you run locally, in Flair_data_splitter.ipynb (jupyter notebook). It creates proper directories and files.
