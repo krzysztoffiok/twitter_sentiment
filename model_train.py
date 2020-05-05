@@ -146,6 +146,7 @@ for i in range(k_folds):
             shuffle=True,
         )
 
-    # rename the model files to fit test_run case
+    # rename the model files to fit test_run and fold
     os.rename(src="{}best-model.pt".format(path2[i]), dst="{}{}_best-model.pt".format(path2[i], test_run))
     os.remove("{}final-model.pt".format(path2[i]))
+    os.rename(src="{}training.log".format(path2[i]), dst="{}{}_training_{}.log".format(path2[i], test_run, i))
