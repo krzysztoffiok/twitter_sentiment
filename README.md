@@ -44,7 +44,7 @@ Roberta LSTM | 0.763 | 0.496 | 0.301 | 0.308 | 0.382
 Roberta CLS | 0.662 | 0.452 | 0.265 | 0.344 | 0.417
 
 Abbrevations stand for:</br>
-TF: Term Frequency</br>
+FE model: Feature Extraction model</br>
 LIWC: Linguistic Enquiry and Word Count</br>
 SEANCE: Sentiment analysis and social cognition engine</br>
 USE: Universal Sentence Encoder</br>
