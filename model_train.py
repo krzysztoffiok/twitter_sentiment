@@ -5,43 +5,38 @@ import sys
 import flair
 import torch
 
-# select device
-# flair.device = torch.device('cuda')
-# flair.device = torch.device('cpu')
-# torch.cuda.empty_cache()
-
 """
 Example use:
+# remember to start by setting a proper --dataset i.e. usnavy or semeval. Default is usnavy.
 
 # to train FastText model with 2-layer biLSTM
-python3 model_train.py --k_folds=5 --test_run=fasttext
+python3 model_train.py --dataset=semeval --k_folds=5 --test_run=fasttext
 
 # to train RoBERTa large scalar mix of 4 last layers model with 2-layer biLSTM
-python3 model_train.py --k_folds=5 --test_run=roberta_lstm
+python3 model_train.py --dataset=usnavy --k_folds=5 --test_run=roberta_lstm
 
 # to fine-tune RoBERTa large model and use CLS token output
 python3 model_train.py --k_folds=5 --test_run=roberta_ft --fine_tune
+
 """
 
 parser = argparse.ArgumentParser(description='Classify data')
 
 parser.add_argument('--k_folds', required=False, type=int, default=1)
 parser.add_argument('--epochs', required=False, type=int, default=1000)
-parser.add_argument('--model', required=False, type=str, default="sentiment",
-                    help="sentiment or subject_category")
 parser.add_argument('--block_print', required=False, default=False,
                     action='store_true', help='Block printable output')
 parser.add_argument('--fine_tune', required=False, default=False,
                     action='store_true', help='Fine tune pre-trained LM')
 parser.add_argument('--test_run', required=True, type=str, default='fasttext')
+parser.add_argument('--dataset', required=False, type=str, default='usnavy')
 
 args = parser.parse_args()
 k_folds = args.k_folds
 epochs = args.epochs
-model_type = str(args.model)
 test_run = args.test_run
 path2 = []
-results_path = "./flair_training_time_results/{}".format(test_run)
+dataset = args.dataset
 fine_tune = args.fine_tune
 
 # disable printing out
@@ -50,18 +45,11 @@ block_print = args.block_print
 if block_print:
     sys.stdout = open(os.devnull, 'w')
 
-# prepare paths for results
-try:
-    os.makedirs(results_path)
-except FileExistsError:
-    print("A test run with that name was already carried out. Try another name.")
-    quit()
-
 # prepare paths for loading data for k fold training
 for i in range(k_folds):
-    path2.append("./data/model_{}_{}/".format(model_type, str(i)))
+    path2.append("./{}_data/model_sentiment_{}/".format(dataset, str(i)))
     try:
-        os.mkdir('./data/model_{}_{}'.format(model_type, str(i)))
+        os.mkdir('./{}_data/model_sentiment_{}'.format(dataset, str(i)))
     except FileExistsError:
         continue
 
@@ -120,13 +108,13 @@ for i in range(k_folds):
         trainer.train(base_path="{}".format(path2[i]),
                       max_epochs=epochs,
                       learning_rate=0.1,
-                      mini_batch_size=32,
+                      mini_batch_size=8,
                       anneal_factor=0.5,
-                      patience=10,
+                      patience=20,
                       # if enough memory is available this can be uncommented
                       # embeddings_storage_mode='gpu',
                       shuffle=True,
-                      min_learning_rate=0.01,
+                      min_learning_rate=0.002,
                       )
 
     # define the training regime for Fine-Tuning
@@ -136,9 +124,8 @@ for i in range(k_folds):
 
         trainer.train(
             "{}".format(path2[i]),
-            learning_rate=3e-5,  # low learning rate as per BERT paper
-            mini_batch_size=32,  # set this high if yo have lots of data, otherwise low
-            mini_batch_chunk_size=12, # set this low if you experience memory errors
+            learning_rate=3e-6,  # low learning rate as per BERT paper
+            mini_batch_size=8,  # set this high if yo have lots of data, otherwise low
             max_epochs=4,  # very few epochs of fine-tuning
             min_learning_rate=3e-6,  # lower the min learning rate
             # if enough memory is available this can be uncommented
