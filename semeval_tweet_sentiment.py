@@ -129,9 +129,9 @@ for emname, embedding in embeddings:
     embfeaturedict = {}
     for fold in range(fold_number):
         # read encoded sentences by the selected language model
-        train = dt.fread(f"./{dataset}_data/embeddings/{embedding}_encoded_sentences_{fold}_train.csv").\
+        train = dt.fread(f"./{dataset}_data/embeddings/{embedding}_encoded_sentences_{fold}train.csv").\
             to_pandas()
-        test = dt.fread(f"./{dataset}_data/embeddings/{embedding}_encoded_sentences_{fold}_test.csv").\
+        test = dt.fread(f"./{dataset}_data/embeddings/{embedding}_encoded_sentences_{fold}test.csv").\
             to_pandas()
         dfemb = pd.concat([train, test], ignore_index=True)
 
@@ -164,11 +164,11 @@ pooled_embeddings = [["Pooled FastText", "fasttext"], ["Pooled RoBERTa", "robert
 for emname, embedding in pooled_embeddings:
     # two options due to naming convention
     if emname != "Universal Sentence Encoder":
-        train = dt.fread(f"./{dataset}_data/embeddings/{embedding}_encoded_sentences_pooled_train.csv").to_pandas()
-        test = dt.fread(f"./{dataset}_data/embeddings/{embedding}_encoded_sentences_pooled_test.csv").to_pandas()
+        train = dt.fread(f"./{dataset}_data/embeddings/{embedding}_encoded_sentences_pooledtrain.csv").to_pandas()
+        test = dt.fread(f"./{dataset}_data/embeddings/{embedding}_encoded_sentences_pooledtest.csv").to_pandas()
     else:
-        train = dt.fread(f"./{dataset}_data/embeddings/USE_encoded_sentences_train.csv").to_pandas()
-        test = dt.fread(f"./{dataset}_data/embeddings/USE_encoded_sentences_test.csv").to_pandas()
+        train = dt.fread(f"./{dataset}_data/embeddings/USE_encoded_sentencestrain.csv").to_pandas()
+        test = dt.fread(f"./{dataset}_data/embeddings/USE_encoded_sentencestest.csv").to_pandas()
     dfemb = pd.concat([train, test], ignore_index=True)
 
     embfeatures = [f"{emname}row"]
