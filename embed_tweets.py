@@ -53,7 +53,10 @@ nrows = args.nrows
 pool = args.pool
 _use = args.use
 dataset = args.dataset
-subset = args.subset
+if dataset == "usnavy":
+    subset = ""
+else:
+    subset = args.subset
 bs = args.bs
 
 # read data
@@ -151,10 +154,10 @@ if not _use:
 
     # if trained embeddings
     if not pool:
-        df.to_csv(f"./{dataset}_data/embeddings/{test_run}_encoded_sentences_{fold}_{subset}.csv")
+        df.to_csv(f"./{dataset}_data/embeddings/{test_run}_encoded_sentences_{fold}{subset}.csv")
     # if pooled embeddings
     else:
-        df.to_csv(f"./{dataset}_data/embeddings/{test_run}_encoded_sentences_pooled_{subset}.csv")
+        df.to_csv(f"./{dataset}_data/embeddings/{test_run}_encoded_sentences_pooled{subset}.csv")
 
 # if universal sentence encoder (USE)
 else:
@@ -186,5 +189,5 @@ else:
     df["dummy_id"] = data["dummy_id"].astype(str)
 
     # output USE embeddings
-    df.to_csv(f"./{dataset}_data/embeddings/USE_encoded_sentences_{subset}.csv")
-    print("USE embeddings saved to: ", f"./{dataset}_data/embeddings/USE_encoded_sentences_{subset}.csv")
+    df.to_csv(f"./{dataset}_data/embeddings/USE_encoded_sentences{subset}.csv")
+    print("USE embeddings saved to: ", f"./{dataset}_data/embeddings/USE_encoded_sentences{subset}.csv")
