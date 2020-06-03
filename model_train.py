@@ -97,7 +97,6 @@ for i in range(k_folds):
         transformer_model = test_run
         if "/" in test_run:
             test_run = test_run.split("/")[1]
-            print("to jest test run:", test_run)
         document_embeddings = TransformerDocumentEmbeddings(model=transformer_model, fine_tune=True)
 
     # define the neural classifier

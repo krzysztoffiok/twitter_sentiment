@@ -1,6 +1,8 @@
 start=`date +%s`
 
-declare -a lrlist=('microsoft/DialoGPT-large' 't5-base')
+declare -a lrlist=('microsoft/DialoGPT-large')
+declare -a secondarylist=('microsoft/DialoGPT-large' 'facebook/bart-large-cnn' 'xlm-mlm-en-2048' 'xlm-roberta-large')
+declare -a thirdlist=('microsoft/DialoGPT-large' 'facebook/bart-large-cnn' 'xlm-mlm-en-2048' 'xlm-roberta-large' 'bert-large-cased' 'bert-large-uncased')
 python3 semeval_data_splitter_optim.py
 for i in "${lrlist[@]}"; do python3 ./model_train.py --dataset=semeval --k_folds=5 --test_run="$i" --fine_tune; done
 python3 semeval_data_splitter.py
@@ -12,5 +14,5 @@ end=`date +%s`
 
 runtime=$((end-start))
 echo $runtime
-destdir=./roberta_optim/bert_optim_time_semeval.txt
+destdir=./roberta_optim/dialogpt_optim_time_semeval.txt
 echo $runtime > $destdir
