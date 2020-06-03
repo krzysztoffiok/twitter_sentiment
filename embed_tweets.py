@@ -49,6 +49,8 @@ args = parser.parse_args()
 
 fold = args.fold
 test_run = args.test_run
+if "/" in test_run:
+    test_run = test_run.split("/")[1]
 nrows = args.nrows
 pool = args.pool
 _use = args.use
