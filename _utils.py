@@ -100,10 +100,10 @@ def ML_classification(allFeatures, train_ml, test_ml, df_ml, classification_mode
     return sum(preds, []), sum(trues, [])
 
 
-def compute_metrics(dataset):
+def compute_metrics(dataset, test_run):
     # read result files to compute metrics including SemEval2017-specific
-    preds = dt.fread(f"./{dataset}_data/predictions.csv").to_pandas()
-    trues = dt.fread(f"./{dataset}_data/trues.csv").to_pandas()
+    preds = dt.fread(f"./{dataset}_data/{test_run}_predictions.csv").to_pandas()
+    trues = dt.fread(f"./{dataset}_data/{test_run}_trues.csv").to_pandas()
     modelColNames = preds.columns.to_list()
     modelColNames.remove("C0")
 
@@ -140,7 +140,51 @@ def compute_metrics(dataset):
         allmetrics[model] = model_metrics
 
     dfmetrics = pd.DataFrame.from_dict(allmetrics)
-    dfmetrics.to_csv(f"{dataset}_metric_results.csv")
+    dfmetrics.to_csv(f"{dataset}_{test_run}_metric_results.csv")
+    print(dfmetrics)
+
+
+def compute_metrics_comb(dataset):
+    # read result files to compute metrics including SemEval2017-specific
+    preds = dt.fread(f"./{dataset}_data/_predictions.csv").to_pandas()
+    trues = dt.fread(f"./{dataset}_data/_trues.csv").to_pandas()
+    modelColNames = preds.columns.to_list()
+    modelColNames.remove("C0")
+
+    # define classes and indexes of true values for each class. For each model the true index values are the
+    # same since the test set was the same.
+    classes = set(trues[f"{modelColNames[0]}"])
+    cls_index = dict()
+    for cls in classes:
+        cls_index[cls] = trues[trues[f"{modelColNames[0]}"] == cls].index.to_list()
+
+    # for each model compute the metrics
+    allmetrics = dict()
+    for model in modelColNames:
+        model_metrics = dict()
+        mae = metrics.mean_absolute_error(y_true=trues[f"{model}"], y_pred=preds[f"{model}"])
+        emd = wasserstein_distance(trues[f"{model}"], preds[f"{model}"])
+        mcc = metrics.matthews_corrcoef(y_true=trues[f"{model}"], y_pred=preds[f"{model}"])
+        f1 = metrics.f1_score(y_true=trues[f"{model}"], y_pred=preds[f"{model}"], average="macro")
+
+        # class wise computation of mean absolute error and later averaging over classes to implement
+        # MAEM from SemEval2017
+        mae_dict = {}
+
+        for cls in classes:
+            local_trues = trues[f"{model}"].iloc[cls_index[cls]]
+            local_preds = preds[f"{model}"].iloc[cls_index[cls]]
+            mae_dict[cls] = metrics.mean_absolute_error(y_true=local_trues, y_pred=local_preds)
+
+        mmae = np.array(list(mae_dict.values())).mean()
+        _metrics = {"MMAE": mmae, "MAE": mae, "EMD": emd, "MCC": mcc, "F1": f1}
+        for metric in _metrics.keys():
+            model_metrics[metric] = _metrics[metric]
+
+        allmetrics[model] = model_metrics
+
+    dfmetrics = pd.DataFrame.from_dict(allmetrics)
+    dfmetrics.to_csv(f"{dataset}_comb_metric_results.csv")
     print(dfmetrics)
 
 

@@ -30,6 +30,7 @@ parser.add_argument('--fine_tune', required=False, default=False,
                     action='store_true', help='Fine tune pre-trained LM')
 parser.add_argument('--test_run', required=True, type=str, default='fasttext')
 parser.add_argument('--dataset', required=False, type=str, default='usnavy')
+parser.add_argument('--mbs', required=False, type=int, default=8)
 
 args = parser.parse_args()
 k_folds = args.k_folds
@@ -38,6 +39,7 @@ test_run = args.test_run
 path2 = []
 dataset = args.dataset
 fine_tune = args.fine_tune
+mbs = args.mbs
 
 # disable printing out
 block_print = args.block_print
@@ -92,7 +94,7 @@ for i in range(k_folds):
 
     # Case 2: fine-tune transformer model and use CLS output
     else:
-        transformer_model = "roberta-large"
+        transformer_model = test_run
         document_embeddings = TransformerDocumentEmbeddings(model=transformer_model, fine_tune=True)
 
     # define the neural classifier
@@ -125,7 +127,7 @@ for i in range(k_folds):
         trainer.train(
             "{}".format(path2[i]),
             learning_rate=3e-6,  # low learning rate as per BERT paper
-            mini_batch_size=8,  # set this high if yo have lots of data, otherwise low
+            mini_batch_size=int(mbs),  # set this high if yo have lots of data, otherwise low
             max_epochs=4,  # very few epochs of fine-tuning
             min_learning_rate=3e-6,  # lower the min learning rate
             # if enough memory is available this can be uncommented

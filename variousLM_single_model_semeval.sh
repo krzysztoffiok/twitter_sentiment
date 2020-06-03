@@ -1,0 +1,17 @@
+start=`date +%s`
+
+declare -a lrlist=('t5-base' 'xlm-mlm-en-2048' 'xlm-roberta-large' 'facebook/bart-large-cnn' 'DialoGPT-large'
+'reformer-enwik8')
+python3 semeval_data_splitter_optim.py
+for i in "${lrlist[@]}"; do python3 ./model_train.py --mbs=1 --dataset=semeval --k_folds=5 --test_run="$i" --fine_tune; done
+python3 semeval_data_splitter.py
+for i in "${lrlist[@]}"; do for j in {0..4}; do python3 embed_tweets.py --dataset=semeval --fold=$j --test_run="$i" --subset=train; done; done
+for i in "${lrlist[@]}"; do for j in {0..4}; do python3 embed_tweets.py --dataset=semeval --fold=$j --test_run="$i" --subset=test; done; done
+for i in "${lrlist[@]}"; do python3 ./ml_single_model_procedure.py --test_run="$i" --dataset=semeval;done
+
+end=`date +%s`
+
+runtime=$((end-start))
+echo $runtime
+destdir=./roberta_optim/various_optim_time_semeval.txt
+echo $runtime > $destdir

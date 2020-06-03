@@ -242,7 +242,7 @@ if _shap is None:
     pd.DataFrame(allPreds).to_csv(f"./{dataset}_data/predictions.csv")
     pd.DataFrame(allTrues).to_csv(f"./{dataset}_data/trues.csv")
 
-    _utils.compute_metrics(dataset=dataset)
+    _utils.compute_metrics_comb(dataset=dataset)
 
 else:
 
