@@ -1,6 +1,6 @@
 start=`date +%s`
 
-declare -a lrlist=('t5-base' 'dialogpt-large' )
+declare -a lrlist=('microsoft/DialoGPT-large' 't5-base')
 python3 semeval_data_splitter_optim.py
 for i in "${lrlist[@]}"; do python3 ./model_train.py --dataset=semeval --k_folds=5 --test_run="$i" --fine_tune; done
 python3 semeval_data_splitter.py
