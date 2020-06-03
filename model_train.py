@@ -95,6 +95,8 @@ for i in range(k_folds):
     # Case 2: fine-tune transformer model and use CLS output
     else:
         transformer_model = test_run
+        if test_run == "facebook/bart-large-cnn":
+            test_run = "bart-large-cnn"
         document_embeddings = TransformerDocumentEmbeddings(model=transformer_model, fine_tune=True)
 
     # define the neural classifier
