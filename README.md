@@ -67,7 +67,7 @@ F1: sklearn.metrics.f1_score(average="macro")</br>
 
 
 ## How to reproduce our paper results:
-Please clone this repository and execute 4 bash scripts to repeat our experiments:
+Please clone this repository and execute 4 bash scripts to repeat our experiments: <br>
 usnavy_experiment.sh <br>
 semeval_experiment.sh <br>
 roberta_mbs_optim.sh <br>
