@@ -67,10 +67,13 @@ F1: sklearn.metrics.f1_score(average="macro")</br>
 
 
 ## How to reproduce our paper results:
-Please clone this repository and execute 3 bash scripts to repeat our experiments:
-usnavy_experiment.sh
-semeval_experiment.sh
-roberta_mbs_optim.sh
+Please clone this repository and execute 4 bash scripts to repeat our experiments:
+usnavy_experiment.sh <br>
+semeval_experiment.sh <br>
+roberta_mbs_optim.sh <br>
+LDA_usnavy.sh <br>
+
+If you wish to carry out the LDA parameter grid search please use LDA_gensim_usnavy.ipynb.
 
 ## Acknowledgment
 This research was carried out as part of the N000141812559 ONR research grant.
