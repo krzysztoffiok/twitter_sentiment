@@ -1,15 +1,7 @@
 # Analysis of Twitter sentiment with various Language Models
-This repository contains data, code and results for fine-grained sentiment analysis. The paper describing this research is in preparation.
-
-*"Analysis of sentiment in tweets addressed to a single Twitter account: comparison of model performance and explainability of predictions"*
-
-Authors: Krzysztof Fiok1, Waldemar Karwowski1, Edgar Gutierrez-Franco12, and Maciej Wilamowski3
-
-
-1 University of Central Florida, Department of Industrial Engineering & Management Systems, Orlando, Florida, USA </br>
-2 2	Center for Latin-American Logistics Innovation, LOGyCA, Bogota, Colombia,110111.</br>
-3 University of Warsaw, Faculty of Economic Sciences, Warsaw, Poland</br>
-<br/>
+This repository contains data, code and results for fine-grained sentiment analysis. The paper describing this research was published in  
+  
+Fiok, K., Karwowski, W., Gutierrez, E., & Wilamowski, M. (2021). Analysis of sentiment in tweets addressed to a single domain-specific Twitter account: Comparison of model performance and explainability of predictions. Expert Systems with Applications, 186, 115771.
 
 The whole repository is published under MIT License (please refer to the [License file](https://github.com/krzysztoffiok/twitter_sentiment/blob/master/LICENSE)).
 
@@ -79,6 +71,7 @@ If you wish to carry out the LDA parameter grid search please use LDA_gensim_usn
 This research was carried out as part of the N000141812559 ONR research grant.
 
 ## Citation:<br/>
-If you decide to use here published code or our dataset please cite our work in the following manner:
-(please contact us directly at this time since the paper is still in preparation).
+If you decide to use here published code or our dataset please cite our work in the following manner:  
+  
+Fiok, K., Karwowski, W., Gutierrez, E., & Wilamowski, M. (2021). Analysis of sentiment in tweets addressed to a single domain-specific Twitter account: Comparison of model performance and explainability of predictions. Expert Systems with Applications, 186, 115771.
 
